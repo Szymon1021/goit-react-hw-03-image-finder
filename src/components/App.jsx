@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { ImageFinder } from './ImageFinder/ImageFinder';
-import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
+import { ImageGallery } from './ImageGallery/ImageGallery';
 import { fetchPhotos } from 'components/api';
 
 export class App extends Component {
@@ -29,8 +29,7 @@ export class App extends Component {
           handleGetRequest={this.handleGetRequest}
           handleInput={this.handleInput}
         ></ImageFinder>
-
-        <ImageGalleryItem photos={this.state.photos}></ImageGalleryItem>
+        <ImageGallery photos={this.state.photos}></ImageGallery>
       </div>
     );
   }
