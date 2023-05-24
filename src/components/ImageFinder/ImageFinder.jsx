@@ -10,21 +10,15 @@ export const ImageFinder = props => {
           </button>
 
           <input
+            onChange={props.handleInput}
             className={styles.input}
             type="text"
-            autocomplete="off"
-            autofocus
+            autoComplete="off"
+            autoFocus
             placeholder="Search images and photos"
           />
         </form>
       </header>
-      <main>
-        <div>
-          <ul className={styles.ImageGallery}>
-            <li></li>
-          </ul>
-        </div>
-      </main>
     </>
   );
 };
