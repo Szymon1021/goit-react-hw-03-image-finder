@@ -7,6 +7,7 @@ export class App extends Component {
   state = {
     photos: [],
     search: '',
+    page: 1,
   };
   handleInput = evt => {
     this.setState({
@@ -21,6 +22,12 @@ export class App extends Component {
     this.setState({ photos: response.hits });
     console.log(this.state.photos);
   };
+  componentDidUpdate(_, prevState) {
+    if (prevState.page !== this.state.page) {
+      const photos = fetchPhotos(this.state.search, this.state.page);
+      this.setState({ photos });
+    }
+  }
 
   render() {
     return (
@@ -30,6 +37,9 @@ export class App extends Component {
           handleInput={this.handleInput}
         ></ImageFinder>
         <ImageGallery photos={this.state.photos}></ImageGallery>
+        <button onClick={() => this.setState({ page: this.state.page + 1 })}>
+          Load more
+        </button>
       </div>
     );
   }

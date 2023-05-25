@@ -1,8 +1,8 @@
 import styles from './ImageGalleryItem.module.css';
 
-export const ImageGalleryItem = ({ id, webformatURL }) => {
+export const ImageGalleryItem = ({ webformatURL }) => {
   return (
-    <li key={id} className={styles.ImageGalleryItem}>
+    <li className={styles.ImageGalleryItem}>
       <img src={webformatURL} alt="" className={styles.image} />
     </li>
   );
