@@ -4,6 +4,7 @@ import { ImageGallery } from './ImageGallery/ImageGallery';
 import { fetchPhotos } from 'components/api';
 import { Button } from './Button/Button';
 import Loader from './Loader/Loader';
+import { Modal } from './Modal/Modal';
 
 export class App extends Component {
   state = {
@@ -11,6 +12,8 @@ export class App extends Component {
     search: '',
     page: 1,
     isLoading: false,
+    modal: false,
+    largeImageURL: '',
   };
   handleInput = evt => {
     this.setState({
@@ -30,8 +33,8 @@ export class App extends Component {
     console.log(this.state.photos);
   };
   async componentDidUpdate(_, prevState) {
-    this.setState({ isLoading: true });
     if (prevState.page !== this.state.page) {
+      this.setState({ isLoading: true });
       const photos = await fetchPhotos(this.state.search, this.state.page);
       console.log(photos);
       this.setState(prevState => ({
@@ -45,10 +48,13 @@ export class App extends Component {
     this.setState(prevState => {
       return {
         page: prevState.page + 1,
+        isLoading: false,
       };
     });
   };
-
+  handleModalButton = () => {
+    this.setState({ modal: true });
+  };
   render() {
     return (
       <div>
@@ -57,7 +63,14 @@ export class App extends Component {
           handleInput={this.handleInput}
         ></ImageFinder>
         <div>{this.state.isLoading ? <Loader /> : null}</div>
-        <ImageGallery photos={this.state.photos}></ImageGallery>
+        <ImageGallery
+          largeImageURL={this.state.largeImageURL}
+          photos={this.state.photos}
+          handleModalButton={this.handleModalButton}
+        ></ImageGallery>
+        {this.state.modal ? (
+          <Modal largeImageURL={this.state.largeImageURL} />
+        ) : null}
         {this.state.photos.length > 0 ? (
           <Button handleButton={this.handleButton} />
         ) : null}
