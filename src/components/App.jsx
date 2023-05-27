@@ -30,11 +30,13 @@ export class App extends Component {
     console.log(this.state.photos);
   };
   async componentDidUpdate(_, prevState) {
+    this.setState({ isLoading: true });
     if (prevState.page !== this.state.page) {
       const photos = await fetchPhotos(this.state.search, this.state.page);
       console.log(photos);
       this.setState(prevState => ({
         photos: [...prevState.photos, ...photos.hits],
+        isLoading: false,
       }));
     }
   }
