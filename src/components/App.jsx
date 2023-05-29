@@ -13,7 +13,7 @@ export class App extends Component {
     page: 1,
     isLoading: false,
     modal: false,
-    largeImageURL: '',
+    photoForModal: '',
   };
   handleInput = evt => {
     this.setState({
@@ -52,8 +52,11 @@ export class App extends Component {
       };
     });
   };
-  handleModalButton = () => {
-    this.setState({ modal: true });
+  handleModalButton = photo => {
+    this.setState({ modal: true, photoForModal: photo });
+  };
+  handleModalButtonClose = () => {
+    this.setState({ modal: false });
   };
   render() {
     return (
@@ -69,7 +72,7 @@ export class App extends Component {
           handleModalButton={this.handleModalButton}
         ></ImageGallery>
         {this.state.modal ? (
-          <Modal largeImageURL={this.state.largeImageURL} />
+          <Modal photoForModal={this.state.photoForModal} />
         ) : null}
         {this.state.photos.length > 0 ? (
           <Button handleButton={this.handleButton} />

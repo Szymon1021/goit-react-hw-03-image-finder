@@ -10,6 +10,7 @@ export const ImageGallery = ({ photos, handleModalButton }) => {
             key={photo.id}
             webformatURL={photo.webformatURL}
             handleModalButton={handleModalButton}
+            largeImageURL={photo.largeImageURL}
           />
         );
       })}
