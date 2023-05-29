@@ -72,7 +72,10 @@ export class App extends Component {
           handleModalButton={this.handleModalButton}
         ></ImageGallery>
         {this.state.modal ? (
-          <Modal photoForModal={this.state.photoForModal} />
+          <Modal
+            photoForModal={this.state.photoForModal}
+            onClose={this.handleModalButtonClose}
+          />
         ) : null}
         {this.state.photos.length > 0 ? (
           <Button handleButton={this.handleButton} />

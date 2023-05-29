@@ -8,6 +8,7 @@ export const ImageGalleryItem = ({
   return (
     <li className={styles.ImageGalleryItem}>
       <button
+        className={styles.button}
         title="open big image"
         onClick={() => handleModalButton(largeImageURL)}
       >
