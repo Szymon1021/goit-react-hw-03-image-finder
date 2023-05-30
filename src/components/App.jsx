@@ -43,7 +43,12 @@ export class App extends Component {
       }));
     }
   }
-
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyPress);
+  }
+  componentWillUnmount() {
+    window.addEventListener('keydown', this.handleKeyPress);
+  }
   handleButton = () => {
     this.setState(prevState => {
       return {
@@ -55,9 +60,17 @@ export class App extends Component {
   handleModalButton = photo => {
     this.setState({ modal: true, photoForModal: photo });
   };
-  handleModalButtonClose = () => {
-    this.setState({ modal: false });
+  handleModalButtonClose = e => {
+    if (e.target === e.currentTarget) {
+      this.setState({ modal: false });
+    }
   };
+  handleKeyPress = event => {
+    if (event.key === 'Escape') {
+      this.setState({ modal: false });
+    }
+  };
+
   render() {
     return (
       <div>
@@ -74,7 +87,8 @@ export class App extends Component {
         {this.state.modal ? (
           <Modal
             photoForModal={this.state.photoForModal}
-            onClose={this.handleModalButtonClose}
+            handleModalButtonClose={this.handleModalButtonClose}
+            handleKeyPress={this.handleKeyPress}
           />
         ) : null}
         {this.state.photos.length > 0 ? (

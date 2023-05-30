@@ -18,6 +18,8 @@
 }
 .button {
    width: 100%;
-    height: 260px;
+    border: none;
+    visibility: visible;
+    color: none;
     
 }
